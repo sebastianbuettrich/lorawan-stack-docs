@@ -25,7 +25,7 @@ Your application will be created and you will be redirected to the application o
 
 You can now use the builtin MQTT server and webhooks to receive uplink traffic and send downlink traffic. End devices are created within applications.
 
-### Link application
+### Link application {{< removed-in-version "3.10.0" >}}
 
 If you did not uncheck the **Link automatically** checkbox during creation, your application will be automatically linked to the Application Server. You can skip this section in this case.
 
@@ -63,7 +63,7 @@ This creates an application `app1` with the `admin` user as collaborator.
 
 Devices are created within applications.
 
-### Link Application
+### Link Application {{< removed-in-version "3.10.0" >}}
 
 In order to send uplinks and receive downlinks from your device, you must link the Application Server to the Network Server. In order to do this, create an API key for the Application Server:
 
