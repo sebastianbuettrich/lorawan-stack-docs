@@ -1,6 +1,7 @@
 ---
 title: "Node-RED"
 description: ""
+weight: 60
 ---
 
 [Node-RED](https://nodered.org/) is a free, JavaScript-based development tool for visual programming, developed to ease the process of wiring together hardware devices, APIs and online services.
