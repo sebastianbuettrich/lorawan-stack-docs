@@ -1,7 +1,44 @@
 ---
-title: Export End Devices from V2
-weight: 20
+title: "Migrating from The Things Network Stack V2"
+description: ""
+weight: 10
 ---
+
+This guide documents the process of migrating end devices from {{% ttnv2 %}} to {{% tts %}}  in bulk, without the need for devices to initiate a rejoin.
+
+<!--more-->
+
+For a breakdown of differences between {{% ttnv2 %}} and {{% tts %}}, see the [Major Changes]({{< relref "major-changes" >}}) section.
+
+## Suggested Migration Process
+
+**First**: Update applications to support the {{% tts %}} data format. If you are using payload formatters, make sure to set them correctly from the Application settings page.
+
+**Second**: Follow this guide in order to migrate a single end device (and gateway, if needed) to {{% tts %}}. Continue by gradually migrating your end devices in small batches. Avoid migrating production workloads before you are certain that they will work as expected.
+
+**Finally**: Once you are confident that your end devices are working properly, migrate the rest of your devices and gateways to {{% tts %}}.
+
+## Configure V2 CLI
+
+You will need to use the latest version of `ttnctl`, the CLI for {{% ttnv2 %}}. Follow the [instructions from The Things Network documentation][1]. An overview is given below:
+
+Download `ttnctl` [for your operating system][2].
+
+Update to the latest version:
+
+```bash
+$ ttnctl selfupdate
+```
+
+Go to [https://account.thethingsnetwork.org][3] and click [ttnctl access code][4].
+
+Use the returned code to login from the CLI with:
+
+```bash
+$ ttnctl user login "t9XPTwJl6shYSJSJxQ1QdATbs4u32D4Ib813-fO9Xlk"
+```
+
+## Export End Devices from V2
 
 In this step, the end devices from {{% ttnv2 %}} will be exported in a JSON format that can then be parsed and imported by {{% tts %}}.
 
@@ -51,4 +88,9 @@ There is also a convenience command to clear all of your devices at once:
 $ ttnctl devices convert-all-to-abp --save-to-attribute "original-app-key"
 ```
 
->**Note:** The AppKey of each device will be printed on the standard output, and stored as a device attribute (with name `original-app-key`). You can retrieve the device attributes with `ttnctl devices info "device-id"`.
+> **Note**: The AppKey of each device will be printed on the standard output, and stored as a device attribute (with name `original-app-key`). You can retrieve the device attributes with `ttnctl devices info "device-id"`.
+
+[1]: https://www.thethingsnetwork.org/docs/network/cli/quick-start.html
+[2]: https://www.thethingsnetwork.org/docs/network/cli/quick-start.html#installation
+[3]: https://account.thethingsnetwork.org
+[4]: https://account.thethingsnetwork.org/users/authorize?client_id=ttnctl&redirect_uri=/oauth/callback/ttnctl&response_type=code

@@ -1,9 +1,7 @@
 ---
-title: Gateway Migration
-weight: 55
+title: Migrating Gateways
+weight: 30
 ---
-
-Next up is migrating gateways from {{% ttnv2 %}} to {{% tts %}}.
 
 For instructions on adding gateways to {{% tts %}} using the CLI or Console, see [Adding Gateways]({{< ref "gateways/adding-gateways" >}}).
 
