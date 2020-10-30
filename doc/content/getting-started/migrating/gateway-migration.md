@@ -1,6 +1,6 @@
 ---
 title: Migrating Gateways
-weight: 30
+weight: 2
 ---
 
 For instructions on adding gateways to {{% tts %}} using the CLI or Console, see [Adding Gateways]({{< ref "gateways/adding-gateways" >}}).

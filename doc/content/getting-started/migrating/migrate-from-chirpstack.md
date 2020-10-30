@@ -1,7 +1,7 @@
 ---
 title: "Migrating from ChirpStack"
 description: ""
-weight: 20
+weight: 4
 ---
 
 This section contains instructions on how to migrate end devices from ChirpStack to {{% tts %}}.

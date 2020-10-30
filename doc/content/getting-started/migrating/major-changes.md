@@ -1,6 +1,6 @@
 ---
 title: Major Changes In The Things Stack
-weight: 70
+weight: 1
 ---
 
 Before getting started, we will discuss major breaking changes between {{% ttnv2 %}} and {{% tts %}}, along with some guidelines to make the migration process easier to manage.
@@ -21,7 +21,7 @@ Furthermore, {{% tts %}} brings full support for all LoRaWAN versions, as well a
 
 ## Gateway Coverage
 
-The Packet Broker enables peering between networks, so traffic received by one network (e.g. the Public Community Network) but intended for a different network ({{% tts %}}) can be forwarded to and from that network. See the [Peering Guide]({{< ref "/integrations/peering" >}}) for details on Packet Broker and how to enable it for your network.
+The Packet Broker enables peering between networks, so traffic received by one network (e.g. the Public Community Network) but intended for a different network ({{% tts %}}) can be forwarded to and from that network. See the [Peering Guide]({{< ref "/reference/peering" >}}) for details on Packet Broker and how to enable it for your network.
 
 With Packet Broker enabled on both {{% tts %}} and {{% ttnv2 %}}, you can receive traffic on {{% tts %}} without having to re-configure any of your gateways.
 
@@ -39,7 +39,7 @@ Also see [Gateways]({{< ref "/gateways" >}}) for instructions on configuring pop
 
 For details on the data format of {{% ttnv2 %}}, see the documentation from [The Things Network](https://www.thethingsnetwork.org/docs/applications/mqtt/api.html).
 
-For details on the data format of {{% tts %}}, see the documentation in [Data Formats]({{% ref "/integrations/data-formats" %}}). It uses a different schema, different names, and has much richer metadata support.
+For details on the data format of {{% tts %}}, see the documentation in [Data Formats]({{% ref "/reference/data-formats" %}}). It uses a different schema, different names, and has much richer metadata support.
 
 **When migrating to {{% tts %}}, ensure your application can properly handle the new {{% tts %}} data format.**
 

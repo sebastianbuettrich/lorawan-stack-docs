@@ -1,10 +1,10 @@
 ---
 title: "Migrating from The Things Network Stack V2"
 description: ""
-weight: 10
+weight: 3
 ---
 
-This guide documents the process of migrating end devices from {{% ttnv2 %}} to {{% tts %}}  in bulk, without the need for devices to initiate a rejoin.
+This section documents the process of migrating end devices from {{% ttnv2 %}} to {{% tts %}}.
 
 <!--more-->
 
