@@ -1,6 +1,7 @@
 ---
 title: Major Changes In The Things Stack
 weight: 1
+aliases: ["/getting-started/migrating-from-v2/major-changes", "/getting-started/migrating-from-v2/mqtt-api-comparison"]
 ---
 
 Before getting started, we will discuss major breaking changes between {{% ttnv2 %}} and {{% tts %}}, along with some guidelines to make the migration process easier to manage.

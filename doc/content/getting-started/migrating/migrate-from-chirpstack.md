@@ -2,6 +2,7 @@
 title: "Migrating from ChirpStack"
 description: ""
 weight: 4
+aliases: "/getting-started/migrating-from-networks/migrate-from-chirpstack"
 ---
 
 This section contains instructions on how to migrate end devices from ChirpStack to {{% tts %}}.

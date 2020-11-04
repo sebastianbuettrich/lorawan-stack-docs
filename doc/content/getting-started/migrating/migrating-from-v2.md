@@ -2,6 +2,7 @@
 title: "Migrating from The Things Network Stack V2"
 description: ""
 weight: 3
+aliases: ["/getting-started/migrating-from-v2", "/getting-started/migrating-from-v2/configure-ttnctl", "/getting-started/migrating-from-v2/export-v2-devices"]
 ---
 
 This section documents the process of migrating end devices from {{% ttnv2 %}} to {{% tts %}}.

@@ -2,6 +2,7 @@
 title: Peering
 description: ""
 summary: Exchange traffic with other LoRaWAN networks via peering to share coverage and improve the overall network performance.
+aliases: "/integrations/peering"
 ---
 
 ## What is it?
