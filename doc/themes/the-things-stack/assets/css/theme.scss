@@ -327,7 +327,7 @@ details + blockquote {
 }
 
 .frequency-plan {
-  .name {
+  .name, .id {
     background-color: $white-ter;
     padding: 0.25rem;
     font-weight: bold;
