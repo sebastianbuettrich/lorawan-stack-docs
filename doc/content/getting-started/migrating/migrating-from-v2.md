@@ -19,7 +19,63 @@ For a breakdown of differences between {{% ttnv2 %}} and {{% tts %}}, see the [M
 
 **Finally**: Once you are confident that your end devices are working properly, migrate the rest of your devices and gateways to {{% tts %}}.
 
-## Configure V2 CLI
+## Configure ttn-lw-migrate
+
+End devices and applications can easily be migrated from {{% ttnv2 %}} to {{% tts %}} with the [`ttn-lw-migrate`](https://github.com/TheThingsNetwork/lorawan-stack-migrate) tool. This tool is used for exporting end devices and applications to a [JSON file]({{< ref "getting-started/migrating/device-json.md" >}}) containing their description. This file can later be imported in {{% tts %}} as described in the [Import End Devices in The Things Stack]({{< ref "getting-started/migrating/import-devices.md" >}}) section.
+
+First, configure the environment with the following variables modified according to your setup:
+
+```bash
+$ export TTNV2_APP_ID="my-ttn-app"                    # TTN App ID
+$ export TTNV2_APP_ACCESS_KEY="ttn-account-v2.a..."   # TTN App Access Key (needs `devices` permissions)
+$ export FREQUENCY_PLAN_ID="EU_863_870_TTN"           # Frequency Plan ID for exported devices
+```
+
+See [Frequency Plans]({{< ref src="/reference/frequency-plans" >}}) for the list of frequency plans available on {{% tts %}}. Make sure to specify the correct Frequency Plan ID. For example, the ID `EU_863_870_TTN` corresponds to the **Europe 863-870 MHz (SF9 for RX2 - recommended)** frequency plan.
+
+Private The Things Network Stack V2 deployments are also supported, and require extra configuration. See `ttn-lw-migrate device --help` for more details. For example, to override the discovery server address:
+
+```bash
+$ export TTNV2_DISCOVERY_SERVER_ADDRESS="discovery.thethings.network:1900"
+```
+
+## Export End Devices from {{% ttnv2 %}}
+
+In order to export a single device, use the following command. The device with ID `mydevice` will exported and saved to `device.json`.
+
+```bash
+$ ttn-lw-migrate devices --source ttnv2 "mydevice" > devices.json
+```
+
+>**Notes:**:
+>- Payload formatters are not exported. See [Payload Formatters](https://thethingsstack.io/integrations/payload-formatters/).
+>- Active device sessions are exported by default. You can disable this by using the `--ttnv2.with-session=false` flag. It is recommended that you do not export session keys for devices that can instead re-join on The Things Stack.
+
+In order to export a large number of devices, create a file named `device_ids.txt` with one device ID per line:
+
+```
+mydevice
+otherdevice
+device3
+device4
+device5
+```
+
+And then export with:
+
+```bash
+$ ttn-lw-migrate devices --source ttnv2 < device_ids.txt > devices.json
+```
+
+Alternatively, you can export all the end devices associated with your application, and save them in `all-devices.json`.
+
+```bash
+$ ttn-lw-migrate application --source ttnv2 "my-ttn-app" > all-devices.json
+```
+
+>**Note:** Keep in mind that an end device can only be registered in one Network Server at a time. After importing an end device to {{% tts %}}, you should remove it from {{% ttnv2 %}}. For OTAA devices, it is enough to simply change the AppKey, so the device can no longer join but the existing session is preserved. Next time the device joins, the activation will be handled by {{% tts %}}.
+
+### Disable Exported End Devices on V2
 
 You will need to use the latest version of `ttnctl`, the CLI for {{% ttnv2 %}}. Follow the [instructions from The Things Network documentation][1]. An overview is given below:
 
@@ -39,45 +95,13 @@ Use the returned code to login from the CLI with:
 $ ttnctl user login "t9XPTwJl6shYSJSJxQ1QdATbs4u32D4Ib813-fO9Xlk"
 ```
 
-## Export End Devices from V2
-
-In this step, the end devices from {{% ttnv2 %}} will be exported in a JSON format that can then be parsed and imported by {{% tts %}}.
-
-The exported end devices contain the device name, description, location data, activation mode (ABP/OTAA), root keys and the AppEUI. They also contain the session keys, so your OTAA devices can simply keep working with {{% tts %}}.
-
 To get started, select the **AppID** and **AppEUI** of the application you want to export your end devices from:
 
 ```bash
 $ ttnctl applications select
 ```
 
-After selecting the application, make sure that you can list the available end devices:
-
-```bash
-$ ttnctl devices list
-```
-
-### Exporting Devices
-
-In order to export a single device, use the following command. The device will be saved to `device.json`.
-
-```bash
-$ ttnctl devices export "device-id" --frequency-plan-id EU_863_870 > device.json
-```
-
-Alternatively, you can export all the end devices with a single command and save them in `all-devices.json`.
-
-```bash
-$ ttnctl devices export-all --frequency-plan-id EU_863_870 > all-devices.json
-```
-
->**Note:** Change `EU_863_870` frequency plan from the command above to the frequency plan corresponding to your region. See [Frequency Plans]({{< ref "/reference/frequency-plans" >}}) for a list of supported Frequency Plans and their respective IDs.
-
->**Note:** Keep in mind that an end device can only be registered in one Network Server at a time. After importing an end device to {{% tts %}}, you should remove it from {{% ttnv2 %}}. For OTAA devices, it is enough to simply change the AppKey, so the device can no longer join but the existing session is preserved. Next time the device joins, the activation will be handled by {{% tts %}}.
-
-### Disable Exported End Devices on V2
-
-After exporting, make sure to clear the AppKey of your OTAA devices. This can be achieved with the following command:
+To clear the AppKey of an OTAA device, use the following command:
 
 ```bash
 $ ttnctl devices convert-to-abp "device-id" --save-to-attribute "original-app-key"
