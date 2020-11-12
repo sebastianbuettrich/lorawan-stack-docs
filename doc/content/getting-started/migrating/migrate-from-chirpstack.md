@@ -9,7 +9,9 @@ This section contains instructions on how to migrate end devices from ChirpStack
 
 <!--more-->
 
-End devices and applications can easily be migrated from ChirpStack to {{% tts %}} with the `ttn-lw-migrate` tool. This tool is used for exporting end devices and applications to a [JSON file]({{< ref "getting-started/migrating/device-json.md" >}}) containing their description. This file can later be imported in {{% tts %}} as described in the [Import End Devices in The Things Stack]({{< ref "getting-started/migrating/import-devices.md" >}}) section.
+## Configure ttn-lw-migrate
+
+End devices and applications can easily be migrated from ChirpStack to {{% tts %}} with the [`ttn-lw-migrate`](https://github.com/TheThingsNetwork/lorawan-stack-migrate) tool. This tool is used for exporting end devices and applications to a [JSON file]({{< ref "getting-started/migrating/device-json.md" >}}) containing their description. This file can later be imported in {{% tts %}} as described in the [Import End Devices in The Things Stack]({{< ref "getting-started/migrating/import-devices.md" >}}) section.
 
 First, configure the environment with the following variables modified according to your setup:
 
@@ -70,7 +72,7 @@ To export end devices from multiple applications to an `applications.json` file,
 $ ttn-lw-migrate --source chirpstack application < applications.txt > applications.json
 ```
 
->**Notes**: 
+>**Notes**:
 >- ABP end devices without an active session can be exported from ChirpStack, but cannot be imported in {{% tts %}}.
 >- `MaxEIRP` parameter may not be always set properly.
 >- ChirpStack `variables` parameter related to payload formatting will always be converted to `null` when the end device is imported to {{% tts %}}.
