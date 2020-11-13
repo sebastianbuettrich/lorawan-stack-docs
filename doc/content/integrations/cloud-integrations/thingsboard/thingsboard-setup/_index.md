@@ -25,7 +25,7 @@ var result = {
     deviceName: deviceName,
     deviceType: deviceType,
     telemetry: {
-         temperature: data.uplink_message.decoded_payload.temperature
+        temperature: data.uplink_message.decoded_payload.temperature
     }
 };
 
